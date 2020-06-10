@@ -321,7 +321,7 @@ public class FileBrowserFragment extends Fragment implements OnFileChangedListen
 
         if (requestCode == Constants.PICK_FOLDER_REQUEST && data!=null) {
             if (resultCode == RESULT_OK) {
-                onFileChanged(new File(data.getData().getPath()));
+                mNavigationHelper.changeDirectory(new File(file.getPath()));
             }
         }
     }
