@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class Constants {
 
+    public static final int PICK_FOLDER_REQUEST = 0x43;
+
     public enum FILTER_OPTIONS {
         FILES,
         FOLDER,

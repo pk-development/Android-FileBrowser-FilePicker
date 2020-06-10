@@ -35,6 +35,12 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/btnFBFragSelFolder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_folder_open_black_24dp" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

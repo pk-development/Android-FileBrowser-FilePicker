@@ -47,6 +47,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static android.app.Activity.RESULT_OK;
+
 public class FileBrowserFragment extends Fragment implements OnFileChangedListener, IContextSwitcher {
     private Context mContext;
     private CustomAdapter mAdapter;
@@ -281,6 +283,8 @@ public class FileBrowserFragment extends Fragment implements OnFileChangedListen
 
             }
         });
+
+
         v.findViewById(R.id.btnFBFragSearch)
                 .setOnClickListener(new View.OnClickListener() {
             @Override
@@ -295,6 +299,25 @@ public class FileBrowserFragment extends Fragment implements OnFileChangedListen
                         :R.drawable.ic_round_close_24_black);
             }
         });
+
+        v.findViewById(R.id.btnFBFragSelFolder).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i2 = new Intent(getActivity(), FolderChooser.class);
+                i2.putExtra(Constants.SELECTION_MODE, Constants.SELECTION_MODES.SINGLE_SELECTION.ordinal());
+                getActivity().startActivityForResult(i2, Constants.PICK_FOLDER_REQUEST);
+            }
+        });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == Constants.PICK_FOLDER_REQUEST && data!=null) {
+            if (resultCode == RESULT_OK) {
+                Uri file = data.getData();
+                onFileChanged(new File(file.getPath()));
+            }
+        }
+    }
 }
