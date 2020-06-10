@@ -48,35 +48,31 @@ public class FileIO {
     }
 
     public void createDirectory(final File path) {
-        if(path.getParentFile()!=null && path.getParentFile().canWrite()) {
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        FileUtils.forceMkdir(path);
-                        mUIUpdateHandler.post(mHelper.updateRunner());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        mUIUpdateHandler.post(mHelper.errorRunner(mContext.getString(R.string.folder_creation_error)));
-                    }
-                }
-            });
-        } else {
-            UIUtils.ShowToast(mContext.getString(R.string.permission_error),mContext);
-        }
+        createFileOrFolder(path, false);
     }
 
     public void createNewFile(final File path) {
-        if(path.getParentFile()!=null && path.getParentFile().canWrite()) {
+        createFileOrFolder(path, true);
+    }
+
+    private void createFileOrFolder(final File file, final boolean isFile) {
+        if(file.getParentFile()!=null && file.getParentFile().canWrite()) {
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        path.createNewFile();
+                        if(isFile) {
+                            file.createNewFile();
+                        } else {
+                            FileUtils.forceMkdir(file);
+                        }
+
                         mUIUpdateHandler.post(mHelper.updateRunner());
                     } catch (IOException e) {
                         e.printStackTrace();
-                        mUIUpdateHandler.post(mHelper.errorRunner(mContext.getString(R.string.file_creation_error)));
+                        mUIUpdateHandler.post(mHelper.errorRunner(mContext.getString(isFile
+                                ? R.string.file_creation_error
+                                : R.string.folder_creation_error)));
                     }
                 }
             });

@@ -281,6 +281,7 @@ public class FileBrowserFragmentV4 extends Fragment implements OnFileChangedList
 
             }
         });
+
         v.findViewById(R.id.btnFBFragSearch)
                 .setOnClickListener(new View.OnClickListener() {
             @Override
