@@ -97,7 +97,7 @@ public class FileBrowserFragmentV4 extends Fragment implements OnFileChangedList
     @Override
     public void changeBottomNavMenu(Constants.CHOICE_MODE multiChoice) {
         if (multiChoice == Constants.CHOICE_MODE.SINGLE_CHOICE) {
-            mBottomView.setItems(R.xml.bottom_nav_items);
+            mBottomView.setItems(R.xml.bottom_nav_items_frag);
             mBottomView.getTabWithId(R.id.menu_none).setVisibility(View.GONE);
             mTopStorageView.getTabWithId(R.id.menu_none).setVisibility(View.GONE);
         } else {
