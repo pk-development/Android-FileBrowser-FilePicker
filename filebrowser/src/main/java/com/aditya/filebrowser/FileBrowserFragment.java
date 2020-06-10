@@ -285,6 +285,8 @@ public class FileBrowserFragment extends Fragment implements OnFileChangedListen
         });
 
 
+        final View btnFolder = v.findViewById(R.id.btnFBFragSelFolder);
+
         v.findViewById(R.id.btnFBFragSearch)
                 .setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,14 +295,18 @@ public class FileBrowserFragment extends Fragment implements OnFileChangedListen
                 editSearchFrag.setText("");
                 editSearchFrag.setVisibility(isSearchOpen ? View.GONE : View.VISIBLE);
                 mCurrentPath.setVisibility(isSearchOpen ? View.VISIBLE : View.GONE);
+                btnFolder.setVisibility(isSearchOpen ? View.VISIBLE : View.GONE);
+
                 mAdapter.getFilter().filter("");
                 v.setBackgroundResource(isSearchOpen
                         ? R.drawable.ic_search_black_24
                         :R.drawable.ic_round_close_24_black);
+
+
             }
         });
 
-        v.findViewById(R.id.btnFBFragSelFolder).setOnClickListener(new View.OnClickListener() {
+        btnFolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i2 = new Intent(getActivity(), FolderChooser.class);
@@ -315,8 +321,7 @@ public class FileBrowserFragment extends Fragment implements OnFileChangedListen
 
         if (requestCode == Constants.PICK_FOLDER_REQUEST && data!=null) {
             if (resultCode == RESULT_OK) {
-                Uri file = data.getData();
-                onFileChanged(new File(file.getPath()));
+                onFileChanged(new File(data.getData().getPath()));
             }
         }
     }
