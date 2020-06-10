@@ -284,6 +284,8 @@ public class FileBrowserFragmentV4 extends Fragment implements OnFileChangedList
             }
         });
 
+        final View btnFolder = v.findViewById(R.id.btnFBFragSelFolder);
+
         v.findViewById(R.id.btnFBFragSearch)
                 .setOnClickListener(new View.OnClickListener() {
             @Override
@@ -292,6 +294,8 @@ public class FileBrowserFragmentV4 extends Fragment implements OnFileChangedList
                 editSearchFrag.setText("");
                 editSearchFrag.setVisibility(isSearchOpen ? View.GONE : View.VISIBLE);
                 mCurrentPath.setVisibility(isSearchOpen ? View.VISIBLE : View.GONE);
+                btnFolder.setVisibility(isSearchOpen ? View.VISIBLE : View.GONE);
+
                 mAdapter.getFilter().filter("");
                 v.setBackgroundResource(isSearchOpen
                         ? R.drawable.ic_search_black_24
@@ -299,7 +303,7 @@ public class FileBrowserFragmentV4 extends Fragment implements OnFileChangedList
             }
         });
 
-        v.findViewById(R.id.btnFBFragSelFolder).setOnClickListener(new View.OnClickListener() {
+        btnFolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i2 = new Intent(getActivity(), FolderChooser.class);
