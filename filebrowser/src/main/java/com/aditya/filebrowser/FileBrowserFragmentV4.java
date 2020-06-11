@@ -319,7 +319,12 @@ public class FileBrowserFragmentV4 extends Fragment implements OnFileChangedList
         if (requestCode == Constants.PICK_FOLDER_REQUEST && data!=null) {
             if (resultCode == RESULT_OK) {
 
-                mNavigationHelper.changeDirectory(new File(data.getData().getPath()));
+                Uri f = data.getData();
+
+                if(f == null || f.getPath() == null) return;
+
+                mNavigationHelper.changeDirectory(new File(f.getPath()));
+                mNavigationHelper.triggerFileChanged();
             }
         }
     }
