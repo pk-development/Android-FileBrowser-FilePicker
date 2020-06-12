@@ -324,7 +324,7 @@ public class FileBrowserFragment extends Fragment implements OnFileChangedListen
                 Uri f = data.getData();
 
                 if(f == null || f.getPath() == null) return;
-
+                mCurrentPath.setText(f.getPath());
                 mNavigationHelper.changeDirectory(new File(f.getPath()));
                 mNavigationHelper.triggerFileChanged();
 
